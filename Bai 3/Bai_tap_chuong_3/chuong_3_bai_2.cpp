@@ -13,26 +13,6 @@ void nhapsothuc(double &x, double &e)
         cin >> e;
     }
 }
-
-long long giaithua(long long k)
-{
-    long long i = 1, kq = 1;
-    while (i <= k)
-    {
-        kq *= i;
-        i += 1;
-    }
-    return kq;
-}
-
-double somu(double x, long long n)
-{
-    double kq = 1;
-    for (long long i = 1; i <= n; i++)
-        kq *= x;
-    return kq;
-}
-
 double emux(double x, double e)
 {
     double kq = 1, tuso = 1, mauso = 1, i = 1, T = 0;
