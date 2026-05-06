@@ -10,7 +10,7 @@ int main()
         cout << "Nhap so nguyen n : ";
         cin >> n;
     } while (n < 5 || n > 20);
-    long long ti_so[n][n], bang_diem[n][n];
+    long long ti_so[n][n] = {0}, bang_diem[n] = {0}, hieu_so[n] = {0};
     for (long long i = 0; i < n; i++)
     {
         for (long long j = i + 1; j < n; j++)
@@ -22,18 +22,18 @@ int main()
             ti_so[j][i] = b;
             if (a < b)
             {
-                bang_diem[i][j] = 0;
-                bang_diem[j][i] = 3;
+                bang_diem[j] += 3;
             }
             else if (a > b)
             {
-                bang_diem[i][j] = 0;
-                bang_diem[j][i] = 3;
+                bang_diem[i] += 3;
             }
             else
             {
-                bang_diem[i][j] = bang_diem[j][i] = 1;
+                bang_diem[i] = bang_diem[j] = 1;
             }
+            hieu_so[i] += a - b;
+            hieu_so[j] += b - a;
         }
     }
     cout << endl
@@ -49,18 +49,24 @@ int main()
         }
         cout << endl;
     }
+    long long doi_bong = 0;
+    for (long long i = 1; i < n; i++)
+    {
+        if (bang_diem[i] > bang_diem[doi_bong])
+            doi_bong = i;
+        else if (bang_diem[i] == bang_diem[doi_bong])
+        {
+            if (hieu_so[i] > hieu_so[doi_bong])
+                doi_bong = i;
+        }
+    }
     cout << endl
-         << "Bang diem : " << endl;
+         << "Diem so tung doi : " << endl;
     for (long long i = 0; i < n; i++)
     {
-        for (long long j = 0; j < n; j++)
-        {
-            if (i == j)
-                cout << setw(9) << "/";
-            else
-                cout << setw(9) << bang_diem[i][j];
-        }
-        cout << endl;
+        cout << "Doi " << i + 1 << " : " << bang_diem[i] << endl;
     }
+    cout << endl
+         << "Doi vo dich trong giai dau : Doi " << doi_bong + 1;
     return 0;
 }
